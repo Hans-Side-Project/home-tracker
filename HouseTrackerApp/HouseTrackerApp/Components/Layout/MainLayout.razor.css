@@ -1,49 +1,74 @@
+/* 淡綠色主題 - 主要布局樣式 */
+
 .page {
     position: relative;
     display: flex;
-    flex-direction: column;
+    background: var(--bg-secondary);
+    min-height: 100vh;
 }
 
 main {
     flex: 1;
+    background: var(--bg-secondary);
 }
 
-.sidebar {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+.sidebar-green {
+    background: var(--bg-card);
+    border-right: 1px solid var(--border-light);
+    box-shadow: var(--shadow-sm);
 }
 
-.top-row {
-    background-color: #f7f7f7;
-    border-bottom: 1px solid #d6d5d5;
-    justify-content: flex-end;
-    height: 3.5rem;
-    display: flex;
-    align-items: center;
+.navbar-green {
+    background: linear-gradient(135deg, var(--primary-green-500), var(--primary-green-600));
+    box-shadow: var(--shadow-md);
+    padding: var(--space-4) 0;
 }
 
-    .top-row ::deep a, .top-row ::deep .btn-link {
-        white-space: nowrap;
-        margin-left: 1.5rem;
-        text-decoration: none;
-    }
+.content {
+    padding: var(--space-6) var(--space-4);
+    background: var(--bg-secondary);
+}
 
-    .top-row ::deep a:hover, .top-row ::deep .btn-link:hover {
-        text-decoration: underline;
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .page {
+        flex-direction: column;
     }
+    
+    main {
+        margin-left: 0 !important;
+    }
+    
+    .sidebar-green {
+        width: 100%;
+        min-height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border-light);
+    }
+    
+    .navbar-green {
+        padding: var(--space-3) 0;
+    }
+    
+    .content {
+        padding: var(--space-4) var(--space-3);
+    }
+}
 
-    .top-row ::deep a:first-child {
-        overflow: hidden;
-        text-overflow: ellipsis;
+@media (max-width: 640px) {
+    .content {
+        padding: var(--space-3) var(--space-2);
     }
+}
 
-@media (max-width: 640.98px) {
-    .top-row {
-        justify-content: space-between;
-    }
+/* 動畫效果 */
+.page {
+    animation: fadeIn 0.3s ease-in-out;
+}
 
-    .top-row ::deep a, .top-row ::deep .btn-link {
-        margin-left: 0;
-    }
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 @media (min-width: 641px) {

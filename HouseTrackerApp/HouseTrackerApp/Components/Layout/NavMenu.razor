@@ -1,29 +1,70 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">HouseTrackerApp</a>
+﻿<!-- 導航選單 - 淡綠色主題 -->
+<div class="d-flex flex-column h-100">
+    <!-- Logo 區域 -->
+    <div class="p-4 border-bottom border-green-light">
+        <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center justify-content-center me-3" 
+                 style="width: 40px; height: 40px; background: var(--primary-green-100); border-radius: var(--radius-lg);">
+                <i class="bi bi-house-heart text-green" style="font-size: 1.25rem;"></i>
+            </div>
+            <div>
+                <h6 class="mb-0 fw-bold text-green">房貸助手</h6>
+                <small class="text-secondary">智能計算工具</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- 導航項目 -->
+    <nav class="flex-grow-1 p-3">
+        <div class="nav-item">
+            <NavLink class="nav-item d-flex align-items-center p-3 rounded-green text-decoration-none" 
+                     href="" Match="NavLinkMatch.All">
+                <i class="bi bi-house-door-fill me-3 icon-green"></i>
+                <span class="fw-medium">首頁</span>
+            </NavLink>
+        </div>
+
+        <div class="nav-item mt-2">
+            <NavLink class="nav-item d-flex align-items-center p-3 rounded-green text-decoration-none" 
+                     href="loan-calculator">
+                <i class="bi bi-calculator me-3 icon-green"></i>
+                <span class="fw-medium">房貸試算器</span>
+            </NavLink>
+        </div>
+
+        <!-- 分隔線 -->
+        <hr class="my-4 border-green-light">
+
+        <!-- 額外功能區域 -->
+        <div class="nav-item">
+            <div class="d-flex align-items-center p-3 text-secondary">
+                <i class="bi bi-info-circle me-3"></i>
+                <small>更多功能即將推出</small>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 底部資訊 -->
+    <div class="p-3 border-top border-green-light">
+        <div class="text-center">
+            <small class="text-secondary">© 2025 房貸助手</small>
+        </div>
     </div>
 </div>
 
-<input type="checkbox" title="Navigation menu" class="navbar-toggler"/>
-
-<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
-            </NavLink>
-        </div>
-    </nav>
-</div>
+<style>
+    .nav-item .nav-item:hover {
+        background: var(--primary-green-50) !important;
+        color: var(--primary-green-700) !important;
+    }
+    
+    .nav-item .nav-item.active {
+        background: var(--primary-green-100) !important;
+        color: var(--primary-green-700) !important;
+        font-weight: 600 !important;
+    }
+    
+    .nav-item .nav-item.active .icon-green {
+        color: var(--primary-green-600) !important;
+    }
+</style>
