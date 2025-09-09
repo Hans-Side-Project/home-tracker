@@ -1,0 +1,204 @@
+@namespace HouseTrackerApp.Components.Shared
+
+<div class="form-group-neomorphism">
+    <label class="form-label-neomorphism">
+        @if (!string.IsNullOrEmpty(IconClass))
+        {
+            <i class="@IconClass me-2 text-accent"></i>
+        }
+        @Label
+        @if (IsRequired)
+        {
+            <span class="text-accent">*</span>
+        }
+    </label>
+
+    @if (!string.IsNullOrEmpty(IconClass))
+    {
+        <div class="input-group-neomorphism">
+            <i class="@IconClass input-icon"></i>
+            @if (InputType == "textarea")
+            {
+                <textarea class="@GetInputClass()"
+                          value="@Value"
+                          @oninput="@HandleInput"
+                          placeholder="@Placeholder"
+                          disabled="@IsDisabled"
+                          readonly="@IsReadOnly">
+                </textarea>
+            }
+            else if (InputType == "select")
+            {
+                <select class="@GetInputClass()"
+                        value="@Value"
+                        @onchange="@HandleChange"
+                        disabled="@IsDisabled">
+                    @if (ChildContent != null)
+                    {
+                        @ChildContent
+                    }
+                </select>
+            }
+            else if (InputType == "number")
+            {
+                <input type="number"
+                       class="@GetInputClass()"
+                       value="@Value"
+                       @oninput="@HandleInput"
+                       placeholder="@Placeholder"
+                       disabled="@IsDisabled"
+                       readonly="@IsReadOnly"
+                       step="@Step"
+                       min="@Min"
+                       max="@Max" />
+            }
+            else
+            {
+                <input type="@InputType"
+                       class="@GetInputClass()"
+                       value="@Value"
+                       @oninput="@HandleInput"
+                       placeholder="@Placeholder"
+                       disabled="@IsDisabled"
+                       readonly="@IsReadOnly" />
+            }
+        </div>
+    }
+    else
+    {
+        @if (InputType == "textarea")
+        {
+            <textarea class="@GetInputClass()"
+                      value="@Value"
+                      @oninput="@HandleInput"
+                      placeholder="@Placeholder"
+                      disabled="@IsDisabled"
+                      readonly="@IsReadOnly">
+            </textarea>
+        }
+        else if (InputType == "select")
+        {
+            <select class="@GetInputClass()"
+                    value="@Value"
+                    @onchange="@HandleChange"
+                    disabled="@IsDisabled">
+                @if (ChildContent != null)
+                {
+                    @ChildContent
+                }
+            </select>
+        }
+        else if (InputType == "number")
+        {
+            <input type="number"
+                   class="@GetInputClass()"
+                   value="@Value"
+                   @oninput="@HandleInput"
+                   placeholder="@Placeholder"
+                   disabled="@IsDisabled"
+                   readonly="@IsReadOnly"
+                   step="@Step"
+                   min="@Min"
+                   max="@Max" />
+        }
+        else
+        {
+            <input type="@InputType"
+                   class="@GetInputClass()"
+                   value="@Value"
+                   @oninput="@HandleInput"
+                   placeholder="@Placeholder"
+                   disabled="@IsDisabled"
+                   readonly="@IsReadOnly" />
+        }
+    }
+
+    @if (!string.IsNullOrEmpty(HelpText))
+    {
+        <small class="help-text-neomorphism">@HelpText</small>
+    }
+
+    @if (!string.IsNullOrEmpty(ErrorMessage))
+    {
+        <div class="alert-neomorphism alert-error mt-2 py-2 px-3">
+            <i class="bi bi-exclamation-circle me-2"></i>@ErrorMessage
+        </div>
+    }
+
+    @if (!string.IsNullOrEmpty(WarningMessage))
+    {
+        <div class="alert-neomorphism alert-warning mt-2 py-2 px-3">
+            <i class="bi bi-exclamation-triangle me-2"></i>@WarningMessage
+        </div>
+    }
+
+    @if (!string.IsNullOrEmpty(InfoMessage))
+    {
+        <div class="alert-neomorphism alert-info mt-2 py-2 px-3">
+            <i class="bi bi-info-circle me-2"></i>@InfoMessage
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public string Label { get; set; } = string.Empty;
+    [Parameter] public string IconClass { get; set; } = string.Empty;
+    [Parameter] public string Value { get; set; } = string.Empty;
+    [Parameter] public EventCallback<string> ValueChanged { get; set; }
+    [Parameter] public string InputType { get; set; } = "text";
+    [Parameter] public string Placeholder { get; set; } = string.Empty;
+    [Parameter] public bool IsRequired { get; set; } = false;
+    [Parameter] public bool IsDisabled { get; set; } = false;
+    [Parameter] public bool IsReadOnly { get; set; } = false;
+    [Parameter] public string ErrorMessage { get; set; } = string.Empty;
+    [Parameter] public string WarningMessage { get; set; } = string.Empty;
+    [Parameter] public string InfoMessage { get; set; } = string.Empty;
+    [Parameter] public string HelpText { get; set; } = string.Empty;
+    [Parameter] public string CssClass { get; set; } = string.Empty;
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    // Number input specific parameters
+    [Parameter] public string Step { get; set; } = "1";
+    [Parameter] public string Min { get; set; } = string.Empty;
+    [Parameter] public string Max { get; set; } = string.Empty;
+
+    private string GetInputClass()
+    {
+        var classes = new List<string> { "form-control-neomorphism" };
+        
+        if (!string.IsNullOrEmpty(CssClass))
+        {
+            classes.Add(CssClass);
+        }
+
+        if (!string.IsNullOrEmpty(ErrorMessage))
+        {
+            classes.Add("border-error");
+        }
+
+        if (IsReadOnly)
+        {
+            classes.Add("readonly");
+        }
+
+        return string.Join(" ", classes);
+    }    private async Task OnValueChanged(string value)
+    {
+        Value = value;
+        await ValueChanged.InvokeAsync(value);
+    }
+
+    private async Task HandleInput(ChangeEventArgs e)
+    {
+        var value = e.Value?.ToString() ?? string.Empty;
+        Value = value;
+        await ValueChanged.InvokeAsync(value);
+    }
+
+    private async Task HandleChange(ChangeEventArgs e)
+    {
+        var value = e.Value?.ToString() ?? string.Empty;
+        Value = value;
+        await ValueChanged.InvokeAsync(value);
+    }
+}
