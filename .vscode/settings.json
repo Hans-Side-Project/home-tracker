@@ -143,14 +143,24 @@
     "livePreview.autoRefreshPreview": "On Changes to Saved Files",
     "cSpell.words": [
         "Anonymization",
+        "Blazor",
         "Evals",
         "Explainability",
         "Ganguli",
         "Gridworlds",
         "Leike",
+        "nameof",
+        "neomorphism",
+        "neumorph",
+        "onchange",
+        "onclick",
+        "oninput",
         "Overfitted",
         "Overfitting",
         "Promptfoo",
+        "rendermode",
+        "rgba",
+        "stylesheet",
         "Zhou"
     ]
 }
