@@ -1,4 +1,5 @@
 using HouseTrackerApp.Components;
+using HouseTrackerApp.Services;
 
 namespace HouseTrackerApp;
 
@@ -11,6 +12,10 @@ public class Program
         // Add services to the container.
         builder.Services.AddRazorComponents()
             .AddInteractiveServerComponents();
+
+        // 註冊應用程式服務
+        builder.Services.AddScoped<ILoanCalculationService, LoanCalculationService>();
+        builder.Services.AddScoped<IValidationService, ValidationService>();
 
         var app = builder.Build();
 
